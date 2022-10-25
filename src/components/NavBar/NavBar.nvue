@@ -1,0 +1,29 @@
+<template>
+    <!-- <page-meta :scroll-top="scrollTop" page-style="" root-font-size="24px">
+        <navigation-bar
+            :loading="nbLoading"
+            :front-color="nbFrontColor"
+            :background-color="nbBackgroundColor"
+         
+        />
+    </page-meta> -->
+    <!-- <u-navbar title="" :bgColor="nbBackgroundColor"> </u-navbar> -->
+    <!-- <page-meta background-color="#fbeec4" page-style="color: #1c1c1c" root-font-size="16px">
+        <navigation-bar front-color="#000000" background-color="#fbeec4" />
+    </page-meta> -->
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            scrollTop: '200rpx',
+            nbLoading: false,
+            nbFrontColor: '#000000',
+            nbBackgroundColor: '#fbeec4',
+        }
+    },
+    onLoad() {},
+    methods: {},
+}
+</script>

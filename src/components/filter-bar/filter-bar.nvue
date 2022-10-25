@@ -1,0 +1,210 @@
+<template>
+    <view style="position: relative">
+        <view @click="handleBarClick" class="filter-bar" id="test">
+            <view class="filter-bar-title" style="">
+                <u-icon name="arrow-down" color="#2979ff" size="14" style="margin-right: 16rpx; margin-top: 7rpx"></u-icon>
+                <slot name="title">
+                    <text>{{ curretnSports.name }}</text>
+                </slot>
+            </view>
+        </view>
+
+        <u-overlay :zIndex="1" :show="visiableOverlay" @click="handleComfim">
+            <slot>
+                <view style="" @click="handleBarClick" class="filter-bar overlay">
+                    <view class="filter-bar-title" :style="{ height: '44px', marginTop: iStatusBarHeight + 'px' }">
+                        <u-icon name="arrow-up" color="#2979ff" size="14" style="margin-right: 16rpx; margin-top: 7rpx"></u-icon>
+                        <slot name="title">
+                            <text>{{ curretnSports.name }} </text>
+                        </slot>
+                    </view>
+                    <!-- position: absolute; height:300rpx;background:red; -->
+                    <view class="option" v-if="visiableOverlay" style="">
+                        <view
+                            v-for="(item, index) in filterBarData"
+                            :key="index"
+                            @click.stop="checkFilterLesson(item)"
+                            class="w-check-btn"
+                            :style="item.active != 1 ? 'background:#FFF;border:1px solid #0ab99c' : 'background:#0ab99c;border:1px solid #0ab99c'"
+                        >
+                            <text style="font-size: 14px" :style="{ color: item.active != 1 ? '#424242' : '#fff' }">{{ item.name }} </text>
+                        </view>
+                    </view>
+                </view>
+            </slot>
+        </u-overlay>
+
+        <!-- <view @click="handleBarClick" class="filter-bar" :style="{ position: 'absolute', top: filterBarReact.top + 'rpx', left:0 }">
+                <view class="filter-bar-title">
+                    <text>全部-{{ curretnSports.name }}</text>
+                </view>
+                <view class="option" v-if="visiableOverlay">
+                    <view
+                        v-for="(item, index) in filterBarData"
+                        :key="index"
+                        @click="checkFilterLesson(item)"
+                        class="w-check-btn"
+                        :style="item.active != 1 ? 'background:#FFF;border:1px solid #0ab99c' : 'background:#0ab99c;border:1px solid #0ab99c'"
+                    >
+                        <text style="font-size: 14px" :style="{ color: item.active != 1 ? '#424242' : '#fff' }">{{ item.name }} </text>
+                    </view>
+                </view>
+            </view> -->
+    </view>
+</template>
+
+<script>
+import parser from '../../uni_modules/uview-ui/components/u-parse/parser';
+
+export default {
+    components: {},
+    name: 'FilterBar',
+    props: {
+        visable: {
+            type: Boolean,
+            default: false,
+        },
+        optionData: {
+            type: Array,
+            default: () => [],
+        },
+        // 当前选择的顶级分类
+        currentOptionId: {
+            type: Number,
+            default: 0,
+        },
+    },
+    data() {
+        return {
+            filterBarData: [],
+            filterBarReact: {
+                height: 0,
+                right: 0,
+                bottom: 0,
+                width: 0,
+                left: 0,
+                top: 0,
+            },
+            currentId: 0,
+            visiableOverlay: false,
+        };
+    },
+    computed: {
+        // 当前显示的顶级分类
+        curretnSports: function () {
+            // console.log(this.currentId, this.currentOptionId);
+            // 给一个默认的
+            if (this.currentId === 0 && this.optionData.length > 0) return this.optionData[0];
+            return (
+                this.optionData.filter((e) => e.fit_sports_category_id == this.currentId)[0] || {
+                    name: '',
+                }
+            );
+        },
+    },
+    onload() {},
+    mounted() {},
+    created() {
+        this.tabBarHeight = uni.getSystemInfoSync().windowBottom;
+        this.iStatusBarHeight = uni.getSystemInfoSync().statusBarHeight;
+        this.currentId = this.currentOptionId;
+        this.filterBarData = JSON.parse(JSON.stringify(this.optionData));
+    },
+    watch: {
+        visable: function (newval) {
+            this.visiableOverlay = newval;
+        },
+        visiableOverlay: function (newval) {
+            this.$emit('update:visable',newval);
+        },
+        optionData: {
+            deep: true,
+            handler(newVal) {
+                this.filterBarData = JSON.parse(JSON.stringify(newVal));
+                console.log(this.filterBarData);
+            },
+        },
+        currentOptionId: function (newVal) {
+            this.currentId = newVal;
+            this.$emit('change', this.curretnSports);
+        },
+    },
+    methods: {
+        handleComfim() {
+            this.visiableOverlay = false;
+            // this.$emit('confirm', this.curretnSports);
+        },
+        // 选择下拉里的选项
+        checkFilterLesson(e) {
+            this.filterBarData.forEach((e) => (e.active = 0));
+            e.active = e.active == 1 ? 0 : 1;
+            this.$forceUpdate();
+            this.currentId = e.fit_sports_category_id;
+            this.$emit('update:currentOptionId', e.fit_sports_category_id);
+
+            this.visiableOverlay = false;
+            this.$emit('confirm', this.curretnSports);
+        },
+        handleBarClick() {
+            this.visiableOverlay = true;
+        },
+    },
+};
+</script>
+
+<style lang="scss" scoped vars="{ offsetWidth }">
+.filter-bar {
+    // background: #ededed;
+    // font-weight: bold;
+    // position: fixed;
+    // position: absolute;
+    // height: 200px;
+    display: flex;
+
+    justify-content: center;
+    // padding-left: 15rpx;
+    &-title {
+        height: 44px;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+}
+
+.option {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 15rpx;
+
+    border-top: 1px solid #fff;
+}
+
+.w-check-btn {
+    margin: 10rpx;
+    border: 1px solid #fff;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1000px;
+    height: 30px;
+    margin-left: 5rpx;
+    padding: 0 30rpx;
+    color: #000;
+}
+
+.overlay {
+    // position: fixed;
+    // left: 0;
+    // top: 0;
+    // bottom: 0;
+    // right: 0;
+    background: #d8d8d8;
+    // z-index: 1;
+    // opacity: 0.3;
+}
+</style>

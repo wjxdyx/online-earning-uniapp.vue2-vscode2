@@ -1,0 +1,137 @@
+<template>
+    <view class="task-item" @click="$emit('click', true)">
+        <!-- des -->
+        <view class="flex flex-row content-container flex-between" style="padding:0 15rpx 0 15rpx">
+            <view style="width: 140rpx; height: 140rpx" >
+           
+                <img :src="value.cover_path" class="w-100 h-100" alt="" />
+            </view>
+            <view class="w-100 h-100 flex-col line" style="padding-left: 10rpx">
+                <view class="flex-row between flex-center title-container">
+                    <view style="margin-right: 10rpx" class="flex-row between">
+                        <view style="margin-right: 10rpx">
+                            <u-tag text="认证" size="mini" type="error"></u-tag>
+                        </view>
+                    </view>
+                    <text class="title">{{ value.title }}</text>
+                    <view style="margin-left: auto">
+                        <text class="amt">+{{value.amt/100}}元</text>
+                    </view>
+                </view>
+                <view class="w-100 flex flex-center flex-start">
+                    <u-tag text="日结" size="mini" type="primary"></u-tag>
+                    <u-tag text="日结" size="mini" type="primary"></u-tag>
+
+                </view>
+
+                <view class="w-100 flex flex-between">
+                    <view
+                        class="flex flex-start w-100"
+                        style="@include text-ellipsis(1);"
+
+                    >
+                        <text class="des w-100 h-100">
+                            {{ value.des }}
+                        </text>
+                    </view>
+                    <view class="flex flex-end w-100">
+                        <text class="font-color-value info"
+                            >{{ value.apply_count }}人已赚
+                        </text>
+                        <view class="split"></view>
+                        <text class="font-color-value info"
+                            >剩余数：{{
+                                value.task_count - value.apply_count
+                            }}</text
+                        >
+                    </view>
+                </view>
+            </view>
+        </view>
+      
+
+        <view class="flex-row between flex-center">
+            <u-line-progress :percentage="30" height="8"></u-line-progress>
+        </view>
+
+    </view>
+</template>
+
+<script>
+export default {
+    name: 'TaskItem',
+    props: {
+        value: Object,
+        default: () => {
+            return {
+                cover: 'https://cdn.uviewui.com/uview/album/1.jpg',
+                title: '网赚 绝缘子 真空负荷块钱',
+                des: '1阿斯蒂芬阿斯蒂芬阿斯蒂芬撒发顺丰三是的发送到阿斯蒂芬是',
+                creater: '中国南互电器',
+                progress_index: 1,
+                progress_count: 100,
+                create_time: '2022-07-22 08:12:11',
+            }
+        },
+    },
+    data() {
+        return {}
+    },
+    watch: {
+        value: {
+            deep: true,
+            function(newVal) {
+                console.log(newVal)
+            },
+        },
+    },
+    onLoad(params) {},
+    methods: {},
+}
+</script>
+<style lang="scss">
+.task-item {
+    width:750rpx;
+    .title-container {
+        height: 60rpx;
+    }
+    .content-container {
+        height: 140rpx;
+    }
+    .des {
+        @include text-ellipsis(1);
+        font-size: 25rpx;
+        color: $fontColorVal;
+        overflow: hidden;
+      
+    }
+    .title {
+        font-size: 30rpx;
+        font-weight: bold;
+    }
+    .amt {
+        font-size: 30rpx;
+        font-weight: bold;
+        color: red;
+    }
+    .info {
+        font-size: 25rpx;
+    }
+}
+.split {
+    height: 100%;
+    width: 2px;
+    background: #eee;
+    margin: 0 5px;
+}
+.label {
+    border-radius: 5rpx;
+    background: #2979ff;
+    padding: 5rpx 10rpx;
+    font-size: 26rpx;
+    color: #fff;
+}
+.label + .label {
+    margin-left: 10rpx;
+}
+</style>

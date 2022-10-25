@@ -1,0 +1,372 @@
+<template>
+    <page-meta
+        background-color="#fbeec4"
+        page-style="color: #1c1c1c"
+        root-font-size="16px"
+    >
+        <navigation-bar front-color="#000000" background-color="#fbeec4" />
+    </page-meta>
+    <view class="page-main app-page">
+        <view
+            class="page-main flex-row"
+            style="padding-left: 0px; padding-right: 0px"
+        >
+            <button
+                class="avatar-wrapper"
+                open-type="chooseAvatar"
+                @chooseavatar="onChooseAvatar"
+            >
+                <img
+                    :src="getAvatar"
+                    style="
+                        height: 60px;
+                        width: 60px;
+                        border-radius: 100px;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                    "
+                />
+                <!-- <u-avatar size="60" :src="getAvatar"></u-avatar> -->
+            </button>
+
+            <view class="flex between" style="padding: 5px; padding-left: 10px">
+                <view class="flex-row flex-start">
+                    <input
+                        type="nickname"
+                        class="weui-input"
+                        :placeholder="getNickname"
+                        @change="setChangeNickname"
+                    />
+
+                    <!-- 会员VIP LOGO -->
+                    <u-tag
+                        v-for="(item, index) in getRole"
+                        :text="item.role_name"
+                        :key="index"
+                        type="success"
+                        plain
+                        size="mini"
+                        icon="https://cdn.uviewui.com/uview/example/tag.png"
+                    ></u-tag>
+                </view>
+                <button
+                    class="user-phone"
+                    open-type="getPhoneNumber"
+                    @getphonenumber="getPhoneNumber"
+                >
+                    手机：{{ getPhone }}
+                </button>
+                <!-- <view style="background: #04a0c7">
+                  <text>代理中心</text>
+              </view> -->
+            </view>
+        </view>
+        <!-- 提现信息 -->
+        <view
+            class="page-main flex flex-row between flex-center"
+            style="background: #f7dc4f; padding: 10px; border-radius: 5px"
+        >
+            <view class="flex-center">
+                <text style="font-size: 12px">累计任务收益</text>
+                <text style="font-weight: bold; font-size: 12px">¥356565</text>
+            </view>
+            <view class="flex-center">
+                <text style="font-size: 12px">未提现</text>
+                <text style="font-weight: bold; font-size: 12px">¥356565</text>
+            </view>
+
+            <view class="flex-center">
+                <u-tag
+                    text="余额明细"
+                    color="#000"
+                    borderColor="#000"
+                    plain
+                    shape="circle"
+                >
+                </u-tag>
+            </view>
+            <view class="flex-center">
+                <u-tag
+                    text="立即提现"
+                    color="#000"
+                    plain
+                    shape="circle"
+                    bgColor="#fff"
+                    borderColor="#fff"
+                >
+                </u-tag>
+            </view>
+        </view>
+
+        <!-- 我完成的任务 -->
+        <view
+            class="page-main box"
+            style="margin-top: 10px; padding: 5px 15px 5px 15px"
+        >
+            <!-- header -->
+            <view
+                class="flex-row between flex-center"
+                style="
+                    height: 30px;
+                    margin-bottom: 8px;
+                    border-bottom: 1px solid #eee;
+                "
+            >
+                <text style="font-weight: bold">我完成的任务</text>
+                <view
+                    class="flex-row flex-center font-color-value"
+                    @click="routeGo('/pages/me/mytask/index')"
+                >
+                    <text
+                        class="font-color-value"
+                        style="font-size: 12px; font-weight: bold"
+                        >查看全部</text
+                    >
+                    <u-icon name="arrow-right" size="14"></u-icon>
+                </view>
+            </view>
+            <view class="flex-row between flex-center">
+                <CBadge
+                    @click.stop="
+                        routeGo('/pages/me/mytask/index', { tabsIndex: 0 })
+                    "
+                >
+                </CBadge>
+                <CBadge
+                    @click.stop="
+                        routeGo('/pages/me/mytask/index', { tabsIndex: 1 })
+                    "
+                >
+                    <text style="font-size: 20rpx">待审核</text>
+                </CBadge>
+                <CBadge
+                    @click.stop="
+                        routeGo('/pages/me/mytask/index', { tabsIndex: 2 })
+                    "
+                >
+                    <text style="font-size: 20rpx">已成功</text>
+                </CBadge>
+                <CBadge
+                    @click.stop="
+                        routeGo('/pages/me/mytask/index', { tabsIndex: 3 })
+                    "
+                >
+                    <text style="font-size: 20rpx">未成功</text>
+                </CBadge>
+            </view>
+        </view>
+        <!-- 排行榜 -->
+        <view
+            class="page-main box flex-row between flex-center"
+            style="margin-top: 10px; padding: 10px"
+        >
+            <!-- header -->
+            <!-- <view class="flex-row between flex-center" @click="routeGo('/pages/me/salary')">
+              <text style="font-weight: bold">排行榜</text>
+              <view class="flex-row flex-center font-color-value">
+                  <u-icon name="arrow-right" size="14"></u-icon>
+              </view>
+          </view> -->
+            <CBadge
+                :show-badge="false"
+                @click.stop="routeGo('/pages/me/salary', { tabsIndex: 0 })"
+            >
+                <text style="font-size: 20rpx">日榜</text>
+            </CBadge>
+            <CBadge
+                :show-badge="false"
+                @click.stop="routeGo('/pages/me/salary', { tabsIndex: 1 })"
+            >
+                <text style="font-size: 20rpx">周榜</text>
+            </CBadge>
+            <CBadge
+                :show-badge="false"
+                @click.stop="routeGo('/pages/me/salary', { tabsIndex: 2 })"
+            >
+                <text style="font-size: 20rpx">月榜</text>
+            </CBadge>
+            <CBadge
+                :show-badge="false"
+                @click.stop="routeGo('/pages/me/salary', { tabsIndex: 3 })"
+            >
+                <text style="font-size: 20rpx">季榜</text>
+            </CBadge>
+        </view>
+        <!-- 我发布的任务 -->
+
+        <view class="page-main box" style="margin-top: 10px; padding: 10px">
+            <!-- header -->
+            <view
+                class="flex-row between flex-center"
+                @click="routeGo('/pages/me/save')"
+            >
+                <text style="font-weight: bold">我发布的任务</text>
+                <view class="flex-row flex-center font-color-value">
+                    <text
+                        class="font-color-value"
+                        style="font-size: 12px; font-weight: bold"
+                        >发布/管理任务</text
+                    >
+                    <u-icon name="arrow-right" size="14"></u-icon>
+                </view>
+            </view>
+        </view>
+
+        <view class="page-main box" style="margin-top: 10px; padding: 10px">
+            <!-- header -->
+            <view
+                class="flex-row between flex-center"
+                @click="routeGo('/pages/me/feedback')"
+            >
+                <text style="font-weight: bold">问题反馈</text>
+                <view class="flex-row flex-center font-color-value">
+                    <u-icon name="arrow-right" size="14"></u-icon>
+                </view>
+            </view>
+        </view>
+        <view class="page-main box" style="margin-top: 10px; padding: 10px">
+            <!-- header -->
+            <view
+                class="flex-row between flex-center"
+                @click="routeGo('/pages/me/save')"
+            >
+                <text style="font-weight: bold">设置</text>
+                <view class="flex-row flex-center font-color-value">
+                    <u-icon name="arrow-right" size="14"></u-icon>
+                </view>
+            </view>
+        </view>
+        <view class="page-main box" style="margin-top: 10px; padding: 10px">
+            <!-- header -->
+            <view
+                class="flex-row between flex-center"
+                @click="routeGo('/pages/me/save')"
+            >
+                <text style="font-weight: bold">邀请码</text>
+                <view class="flex-row flex-center font-color-value">
+                    <u-icon name="arrow-right" size="14"></u-icon>
+                </view>
+            </view>
+        </view>
+        <view class="page-main box" style="margin-top: 10px; padding: 10px">
+            <!-- header -->
+            <view
+                class="flex-row between flex-center"
+                @click="routeGo('/pages/me/medal')"
+            >
+                <text style="font-weight: bold">会员中心</text>
+                <view class="flex-row flex-center font-color-value">
+                    <u-icon name="arrow-right" size="14"></u-icon>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import config from '@/config'
+import { mapGetters } from 'vuex'
+import CBadge from './components/CBadge'
+import { getPhone, uploadFile } from '@/api/index'
+export default {
+    components: { CBadge },
+    data() {
+        return {
+            baseUrl: config.baseUrl,
+        }
+    },
+    onLoad() {
+        this.$nextTick(() => {
+            console.log(this.$refs.PhoneRef)
+        })
+    },
+    onReady() {
+        this.$nextTick(() => {
+            console.log(this.$refs.PhoneRef)
+        })
+    },
+    computed: {
+        ...mapGetters(['getPhone', 'getNickname', 'getAvatar', 'getRole']),
+    },
+    mounted() {
+        console.log(this.$refs.PhoneRef)
+    },
+    watch: {
+        getAvatar: function (newVal) {
+            console.log(newVal, 'change,nickname')
+            this.$forceUpdate()
+        },
+    },
+    methods: {
+        routeGo(url, params) {
+            uni.$u.route(url, params)
+        },
+        setChangeNickname(e) {
+            console.log(e, this.getNickname)
+            this.$store
+                .dispatch('saveUserInfo', { nickname: e.detail.value })
+                .then((r) => {
+                    console.log(r, 'nuve')
+                })
+        },
+        // 绑定手机号
+        getPhoneNumber(e) {
+            if (e.detail.errMsg === 'getPhoneNumber:ok') {
+                this.$store.dispatch('getPhoneNumber', e.detail).then((r) => {})
+            }
+        },
+        onChooseAvatar(e) {
+            const { avatarUrl } = e.detail
+            this.avatarUrl = avatarUrl
+            console.log(avatarUrl, e)
+            this.$forceUpdate()
+            uploadFile(
+                avatarUrl,
+                'avatar',
+                {},
+                {
+                    authorization: this.$store.state.authorization,
+                }
+            ).then((r) => {
+                console.log(r)
+            })
+        },
+    },
+}
+</script>
+
+<style lang="scss">
+c-badge {
+    .u-badge--not-dot {
+        position: absolute;
+        right: -5px;
+        top: -5px;
+        padding: 5px !important;
+    }
+}
+.avatar-wrapper {
+    background: #ffffff00;
+    border: initial;
+    box-shadow: initial;
+    padding: 0px;
+}
+.avatar-wrapper::after {
+    border: 0px;
+    padding: 0px;
+}
+.user-phone {
+    font-size: 12px;
+    background-color: initial;
+    text-align: left;
+    padding: 0;
+}
+.user-phone::after {
+    border: 0px;
+}
+.weui-input {
+    min-width: 10px;
+    width: 100px;
+}
+</style>

@@ -1,0 +1,152 @@
+<template>
+    <view>
+        <!-- {{defaultPath}} -->
+        <view class="category">
+            <div class="category-option" v-for="(item, index) in optData" :key="item.id">
+                <view class="category-option-item u-test" :class="defaultPath.includes(item[prop.value]) ? 'default' : ''" @click="handleItemClick(item, level, index, optData)">
+                    <text style="font-size: 6px"> {{ item[prop.label] }}/{{ item.active }} </text>
+                </view>
+                <!-- category-offset`"  -->
+                <!-- v-if="children&&defaultPath.includes(item[prop.value])" -->
+                <!-- v-if="item.active === 1" -->
+                <SelectOption
+                    :option-level="level"
+                    class="category-offset"
+                    :style="{ left: 187 + 'rpx' }"
+                    @itemClick="
+                        (event) => {
+                            $emit('itemClick', event);
+                        }
+                    "
+                    :defaultPath="defaultPath"
+                    v-if="children && item.active === 1"
+                    :optData="item.children"
+                    :parentPath="selectValue"
+                ></SelectOption>
+            </div>
+        </view>
+    </view>
+</template>
+
+<script>
+import parser from '../../uni_modules/uview-ui/components/u-parse/parser';
+
+export default {
+    components: {},
+    name: 'SelectOption',
+    props: {
+        defaultPath: {
+            type: Array,
+            default: () => {
+                return [];
+            },
+        },
+
+        prop: {
+            type: Object,
+            default: () => {
+                return {
+                    value: 'id',
+                    label: 'name',
+                };
+            },
+        },
+        optData: {
+            type: Array,
+            default: () => [],
+        },
+        optionLevel: {
+            type: Number,
+            default: 0,
+        },
+        offset: {
+            type: String,
+            default: '0rpx',
+        },
+        parentPath: {
+            type: Object,
+            default: () => {
+                return {};
+            },
+        },
+    },
+    data() {
+        return {
+            level: 0,
+            offsetWidth: 100,
+            children: [],
+            selectValue: {},
+        };
+    },
+    computed: {},
+    mounted() {},
+    created() {
+        // this.currentPath =[...this.currentPath,...this.defaultPath];
+        this.level = uni.$u.deepClone(this.optionLevel) + 1;
+    },
+    watch: {
+        parentPath: {
+            deep: true,
+            handler: function (newval) {
+                this.children = [];
+                this.currentPath = newval.idPath;
+            },
+        },
+    },
+    methods: {
+        handleTest({ data, path, level }) {
+            // console.log(data,path,this.level,level,this.selectValue);
+        },
+        //
+        handleItemClick(ele, level, index, pData) {
+            let { children, idPath, ...data } = ele;
+            this.selectValue = data;
+
+            this.$emit('itemClick', { data, path: idPath, level: this.level });
+            pData.map((e) => (e.active = 0));
+            ele.active = 1;
+
+            this.children = children;
+
+            this.$forceUpdate();
+        },
+    },
+};
+</script>
+
+<style lang="scss" scoped vars="{ offsetWidth }">
+// .app{
+//     padding: 15px;
+// }
+// 分类
+.category {
+    background: #f8f8f8;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    flex-direction: column;
+    &-offset {
+        position: absolute;
+        top: 0;
+    }
+    &-header {
+        font-weight: bold;
+        padding: 15rpx;
+        font-size: 14px;
+    }
+    &-option {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        &-item {
+            width: 187rpx;
+
+            height: 30px;
+            display: inline;
+        }
+    }
+}
+.default {
+    background: red;
+}
+</style>

@@ -1,0 +1,272 @@
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * 使用的时候，请将下面的一行复制到您的uniapp项目根目录的uni.scss中即可
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+@import 'uview-ui/theme.scss';
+@import '/src/common/main.scss';
+@mixin text-ellipsis($line: 2) {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+}
+.data-footer-fixed {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}
+$fontColor: #000;
+$fontColorVal: rgb(165, 164, 164);
+
+.flex {
+    display: flex;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+.flex-center {
+    align-items: center;
+}
+.flex-start {
+    justify-content: flex-start;
+}
+.flex-end {
+    justify-content: flex-end;
+}
+.between {
+    justify-content: space-between;
+}
+.flex-between {
+    justify-content: space-between;
+}
+line {
+    outline: 1px solid red;
+}
+.font-color-value {
+    color: $fontColorVal;
+}
+
+.app-page {
+    width: 750rpx;
+    color: var($fontColor);
+    background-image: linear-gradient(
+        #fbeec4,
+        rgb(255, 255, 255),
+        rgb(255, 255, 255),
+        rgb(255, 255, 255),
+        rgb(255, 255, 255),
+        rgb(255, 255, 255)
+    );
+}
+.page-main {
+    // padding: 5rpx;
+}
+.line {
+    border: 1px solid red;
+}
+@for $i from 1 to 100 {
+    .m-#{$i} {
+        margin: #{$i}px;
+    }
+}
+@for $i from 1 through 100 {
+    .mr-#{$i} {
+        margin-right: #{$i}px;
+    }
+}
+@for $i from 1 through 100 {
+    .mt-#{$i} {
+        margin-top: #{$i}px;
+    }
+}
+@for $i from 1 through 100 {
+    .mb-#{$i} {
+        margin-bottom: #{$i}px;
+    }
+}
+@for $i from 1 through 100 {
+    .ml-#{$i} {
+        margin-left: #{$i}px;
+    }
+}
+@for $i from 1 through 100 {
+    .p-#{$i} {
+        padding: #{$i}px;
+    }
+}
+@for $i from 1 through 100 {
+    .w-#{$i} {
+        width: #{$i + '%'} !important;
+    }
+}
+@for $i from 1 through 100 {
+    .h-#{$i} {
+        height: #{$i + '%'} !important;
+    }
+}
+
+.tasklist .uni-list-item__container {
+    padding: 0px !important;
+}
+.u-tag ~ .u-tag {
+    margin-left: 10rpx;
+}
+.page-main {
+    padding: 20rpx;
+}
+
+.box {
+    box-shadow: 0px 0px 1px #eee;
+}
+$myp-color-primary: #8f9cff;
+$myp-color-success: #8fdaff;
+$myp-color-warning: #ffd666;
+$myp-color-error: #ff9090;
+
+$myp-color-custom: #4a5061;
+$myp-color-link: #0273f1;
+
+$myp-text-color: #333232;
+$myp-text-color-inverse: #ffffff;
+$myp-text-color-second: #666464;
+$myp-text-color-third: #999696;
+$myp-text-color-forth: #ccc8c8;
+
+$myp-text-color-place: #ccc8c8;
+$myp-text-color-disabled: #ccc8c8;
+
+$myp-bg-color-inverse: #ffffff;
+$myp-bg-color-page: #fafafa;
+$myp-bg-color-light: #f3f4f5;
+$myp-bg-color-dark: #f1f1f1;
+
+$myp-bg-color-hover: #f1f1f1;
+$myp-bg-color-hover-dark: rgba(0, 0, 0, 0.8);
+$myp-bg-color-mask: rgba(0, 0, 0, 0.2);
+$myp-bg-color-mask-dark: rgba(0, 0, 0, 0.8);
+
+$myp-border-color: #f7f5f5;
+$myp-border-color-light: #f7f5f5;
+$myp-border-color-dark: #ebebeb;
+$myp-border-color-inverse: #ffffff;
+
+/* #ifdef APP-NVUE */
+$myp-border-width: 1px;
+/* #endif */
+/* #ifndef APP-NVUE */
+$myp-border-width: 1px;
+/* #endif */
+
+$myp-height-ss: 40rpx;
+$myp-height-s: 60rpx;
+$myp-height-base: 80rpx;
+$myp-height-l: 100rpx;
+$myp-height-ll: 120rpx;
+
+$myp-font-size-ss: 24rpx;
+$myp-font-size-s: 28rpx;
+$myp-font-size-base: 30rpx;
+$myp-font-size-l: 32rpx;
+$myp-font-size-ll: 36rpx;
+
+$myp-lh-ss: 34rpx;
+$myp-lh-s: 40rpx;
+$myp-lh-base: 42rpx;
+$myp-lh-l: 45rpx;
+$myp-lh-ll: 50rpx;
+
+$myp-border-radius-ss: 4rpx;
+$myp-border-radius-s: 6rpx;
+$myp-border-radius-base: 12rpx;
+$myp-border-radius-l: 24rpx;
+$myp-border-radius-ll: 60rpx;
+
+$myp-space-ss: 6rpx;
+$myp-space-s: 12rpx;
+$myp-space-base: 16rpx;
+$myp-space-l: 24rpx;
+$myp-space-ll: 32rpx;
+
+$myp-wing-ss: 12rpx;
+$myp-wing-s: 24rpx;
+$myp-wing-base: 32rpx;
+$myp-wing-l: 36rpx;
+$myp-wing-ll: 40rpx;
+
+$myp-opacity-disabled: 0.5;
+$myp-opacity-hover: 0.5;
+
+$myp-nav-title-color: #000000;
+$myp-nav-title-size: 16px;
+$myp-nav-icon-color: #4c4c4c;
+$myp-nav-icon-size: 20px;
+$myp-nav-item-color: #4c4c4c;
+$myp-nav-item-size: 14px;
+$myp-nav-bg-color: #ffffff;
+
+$uni-color-primary: #007aff;
+$uni-color-success: #4cd964;
+$uni-color-warning: #f0ad4e;
+$uni-color-error: #dd524d;
+
+$uni-text-color: #333;
+$uni-text-color-inverse: #fff;
+$uni-text-color-grey: #999;
+$uni-text-color-placeholder: #808080;
+$uni-text-color-disable: #c0c0c0;
+
+$uni-bg-color: #ffffff;
+$uni-bg-color-grey: #f8f8f8;
+$uni-bg-color-hover: #f1f1f1;
+$uni-bg-color-mask: rgba(0, 0, 0, 0.4);
+
+$uni-border-color: #c8c7cc;
+
+$uni-font-size-sm: 24rpx;
+$uni-font-size-base: 28rpx;
+$uni-font-size-lg: 32rpx;
+
+$uni-img-size-sm: 40rpx;
+$uni-img-size-base: 52rpx;
+$uni-img-size-lg: 80rpx;
+
+$uni-border-radius-sm: 4rpx;
+$uni-border-radius-base: 6rpx;
+$uni-border-radius-lg: 12rpx;
+$uni-border-radius-circle: 50%;
+
+$uni-spacing-row-sm: 10px;
+$uni-spacing-row-base: 20rpx;
+$uni-spacing-row-lg: 30rpx;
+
+$uni-spacing-col-sm: 8rpx;
+$uni-spacing-col-base: 16rpx;
+$uni-spacing-col-lg: 24rpx;
+
+$uni-opacity-disabled: 0.3;
+
+$uni-color-title: #2c405a;
+$uni-font-size-title: 40rpx;
+$uni-color-subtitle: #555555;
+$uni-font-size-subtitle: 36rpx;
+$uni-color-paragraph: #3f536e;
+$uni-font-size-paragraph: 30rpx;
+.w-ns {
+    .u-navbar__content {
+        background-color: #ff8440;
+        background: linear-gradient(to right, #ff8440, #ff1e0f);
+    }
+    .u-status-bar {
+        background-color: #ff8440;
+        background: linear-gradient(to right, #ff8440, #ff1e0f);
+    }
+}

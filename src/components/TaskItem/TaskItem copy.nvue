@@ -1,0 +1,137 @@
+<template>
+    <page-meta
+        background-color="#fbeec4"
+        page-style="color: #1c1c1c"
+        root-font-size="16px"
+    >
+        <navigation-bar front-color="#000000" background-color="#fbeec4" />
+    </page-meta>
+    <view
+        style="background: #fff"
+        class="task-item page-main"
+        @click="$emit('click', true)"
+    >
+        <!-- title -->
+        <view class="flex-row between flex-center">
+            <text style="font-size: 30rpx; font-weight: bold">{{
+                value.title
+            }}</text>
+            <view style="margin-left: auto">
+                <!-- <text class="font-color-value" style="font-size: 18rpx">时限:24小时</text> -->
+            </view>
+        </view>
+        <!-- des -->
+        <view class="flex flex-row line" style="padding-top: 10rpx">
+            <view style="width: 95rpx; height: 95rpx">
+                <img
+                    :src="value.cover"
+                    style="width: 100%; height: 100%"
+                    alt=""
+                />
+            </view>
+            <view class=" " style="padding-left: 10rpx;width:100%">
+                <view class="">
+ 
+                <view class="flex flex-row">
+                    <text class="label">日结</text>
+                    <text class="label">日结</text>
+                    <text class="label">日结</text>
+                </view>
+                <!-- <u-tag text="¥5.5" size="mini" type="error"></u-tag> -->
+                <text style="font-size: 30rpx; font-weight: bold; color: red"
+                    >+5.5~500元</text
+                >
+                <view class="flex flex-row">
+                    <!-- <text class="label">日结</text>
+                    <text class="label">日结</text>
+                    <text class="label">日结</text> -->
+                </view>
+                </view>
+                <view class=" flex flex-row flex-between flex-center">
+                    <u-line-progress :percentage="30" height="8"></u-line-progress>
+                    <view style="width: 90rpx" class="flex flex-end">
+                        <text class="font-color-value" style="font-size: 18rpx"
+                        >进度</text
+                        >
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- footer -->
+<!-- 
+        <view class="flex-row between flex-center line">
+            <u-line-progress :percentage="30" height="8"></u-line-progress>
+            <view style="width: 90rpx" class="flex flex-end">
+                <text class="font-color-value" style="font-size: 18rpx"
+                    >进度</text
+                >
+            </view>
+        </view> -->
+        <!-- <view class="flex-row flex-center">
+            <text class="font-color-value" style="font-size: 18rpx">
+                {{ value.creater }}</text
+            >
+
+            <view class="split"></view>
+            <text class="font-color-value" style="font-size: 18rpx">
+                {{ value.create_time }}</text
+            >
+        </view> -->
+    </view>
+</template>
+
+<script>
+export default {
+    name: 'TaskItem',
+    props: {
+        value: {
+            type: Object,
+            default: () => {
+                return {
+                    cover: 'https://cdn.uviewui.com/uview/album/1.jpg',
+                    title: '真空负荷块钱',
+                    des: '1阿斯蒂芬阿斯蒂芬阿斯蒂芬撒发顺丰三是的发送到阿斯蒂芬是',
+                    creater: '中国南互电器',
+                    progress_index: 1,
+                    progress_count: 100,
+                    create_time: '2022-07-22 08:12:11',
+                }
+            },
+        },
+    },
+    data() {
+        return {}
+    },
+    watch: {
+        value: {
+            deep: true,
+            function(newVal) {
+                console.log(newVal)
+            },
+        },
+    },
+    onLoad(params) {},
+    methods: {},
+}
+</script>
+<style lang="scss">
+.task-item {
+    .des {
+        @include text-ellipsis(1);
+        font-size: 30rpx;
+        color: $fontColorVal;
+    }
+}
+.split {
+    height: 100%;
+    width: 2px;
+    background: #eee;
+    margin: 0 5px;
+}
+.label {
+    font-size: 16rpx;
+    border-radius: 5rpx;
+    background: #2979ff;
+    color: #fff;
+}
+</style>

@@ -1,0 +1,198 @@
+{
+  "id": "2282035",
+  "name": "edu-exam",
+  "font_family": "edu-exam",
+  "css_prefix_text": "edu-exam-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1001141",
+      "name": "添加",
+      "font_class": "icontd",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "19579675",
+      "name": "意见反馈",
+      "font_class": "yijianfankui",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "19579676",
+      "name": "会员角标",
+      "font_class": "huiyuanjiaobiao",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "19579677",
+      "name": "知识点刷题",
+      "font_class": "zhishidianshuati",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "19579678",
+      "name": "错题集",
+      "font_class": "cuotiji",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "19579679",
+      "name": "发现",
+      "font_class": "faxian",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "19579680",
+      "name": "历年真题",
+      "font_class": "linianzhenti",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "19579681",
+      "name": "学霸排行",
+      "font_class": "xuebapaihang",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "19579682",
+      "name": "精编练习",
+      "font_class": "jingbianlianxi",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "19579683",
+      "name": "密押题库",
+      "font_class": "miyatiku",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "19579684",
+      "name": "模拟考试",
+      "font_class": "monikaoshi",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "19579685",
+      "name": "时政刷题",
+      "font_class": "shizhengshuati",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "19579686",
+      "name": "我的个人中心",
+      "font_class": "wodegerenzhongxin",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "18878477",
+      "name": "奖牌",
+      "font_class": "jiangpai4",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
+      "icon_id": "5024641",
+      "name": "章节练习01",
+      "font_class": "zhangjielianxi",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "5055168",
+      "name": "面试安排",
+      "font_class": "mianshianpai",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "7580595",
+      "name": "考试",
+      "font_class": "ziyuan",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "9591227",
+      "name": "做题",
+      "font_class": "zuoti",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "17967642",
+      "name": "指南",
+      "font_class": "zhinan",
+      "unicode": "eeb3",
+      "unicode_decimal": 61107
+    },
+    {
+      "icon_id": "5326780",
+      "name": "copy",
+      "font_class": "copy",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "5219226",
+      "name": "水果",
+      "font_class": "shuiguo1",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "18923317",
+      "name": "水果",
+      "font_class": "shuiguo1-copy",
+      "unicode": "eb54",
+      "unicode_decimal": 60244
+    },
+    {
+      "icon_id": "18923318",
+      "name": "水果",
+      "font_class": "shuiguo1-copy1",
+      "unicode": "eb55",
+      "unicode_decimal": 60245
+    },
+    {
+      "icon_id": "3853647",
+      "name": "定位",
+      "font_class": "dingwei",
+      "unicode": "eb53",
+      "unicode_decimal": 60243
+    },
+    {
+      "icon_id": "3775369",
+      "name": "论文题目",
+      "font_class": "lunwentimu",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "5219284",
+      "name": "水果",
+      "font_class": "shuiguo",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "8691940",
+      "name": "对比",
+      "font_class": "duibi",
+      "unicode": "e6f8",
+      "unicode_decimal": 59128
+    }
+  ]
+}

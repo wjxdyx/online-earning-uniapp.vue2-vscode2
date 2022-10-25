@@ -1,0 +1,100 @@
+<template>
+    <view class="task-item page-main" @click="$emit('click', true)">
+        <!-- title -->
+        <view class="flex-row between flex-center">
+            <view style="margin-right: 10rpx" class="flex-row between">
+                <view style="margin-right: 10rpx">
+                    <u-tag text="认证" size="mini" type="error"></u-tag>
+                </view>
+            </view>
+            <text style="font-size: 30rpx; font-weight: bold">{{ value.title }}</text>
+            <view style="margin-left: auto">
+                <!-- <text class="font-color-value" style="font-size: 18rpx">时限:24小时</text> -->
+            </view>
+        </view>
+        <!-- des -->
+        <view class="flex flex-row" style="padding-top: 10rpx">
+            <view style="width: 95rpx; height: 95rpx">
+                <!-- <u--image
+                    radius="5rpx"
+                    :showLoading="false"
+                    :src="value.cover"
+                    width="95rpx"
+                    height="95rpx"
+                    @click="click"
+                ></u--image> -->
+                <img :src="value.cover" style="width: 100%; height: 100%" alt="" />
+            </view>
+            <view class="flex" style="padding-left: 10rpx">
+              
+                <text class="des">
+                    {{ value.des }}
+                </text>
+                <!-- <u-tag text="¥5.5" size="mini" type="error"></u-tag> -->
+                <text style="font-size: 30rpx; font-weight: bold; color: red">5.5~500元</text>
+          <view class="flex flex-row">
+                    <text style="font-size: 16rpx; padding:3rpx 10rpx;border-radius:5rpx;background: #2979ff; color: #fff">日结</text>
+                </view>
+            </view>
+        </view>
+        <!-- footer -->
+
+        <view class="flex-row between flex-center" style="height: 20rpx; margin-top: 10rpx">
+            <u-line-progress :percentage="30" height="8"></u-line-progress>
+        </view>
+        <view class="flex-row flex-center" style="height: 20rpx; margin-top: 10rpx">
+            <text class="font-color-value" style="font-size: 18rpx"> {{ value.creater }}</text>
+            <view style="height: 100%; width: 2px; background: #eee; margin: 0 5px"></view>
+            <text class="font-color-value" style="font-size: 18rpx"
+                >进度:{{ value.progress_index }}/{{ value.progress_count }}</text
+            >
+            <view style="height: 100%; width: 2px; background: #eee; margin: 0 5px"></view>
+            <text class="font-color-value" style="font-size: 18rpx"> {{ value.create_time }}</text>
+        </view>
+    </view>
+</template>
+
+<script>
+export default {
+    name: 'TaskItem',
+    props: {
+        value: Object,
+        default: () => {
+            return {
+                cover: 'https://cdn.uviewui.com/uview/album/1.jpg',
+                title: '网赚 绝缘子 真空负荷块钱',
+                des: '1阿斯蒂芬阿斯蒂芬阿斯蒂芬撒发顺丰三是的发送到阿斯蒂芬是',
+                creater: '中国南互电器',
+                progress_index: 1,
+                progress_count: 100,
+                create_time: '2022-07-22 08:12:11',
+            }
+        },
+    },
+    data() {
+        return {}
+    },
+    watch: {
+        value: {
+            deep: true,
+            function(newVal) {
+                console.log(newVal)
+            },
+        },
+    },
+    onLoad(params) {},
+    methods: {},
+}
+</script>
+<style lang="scss">
+.task-item {
+    .des {
+        @include text-ellipsis(1);
+        font-size: 18rpx;
+        // text-indent: 1em;
+        width: 600rpx;
+        // padding-left: 10rpx;
+        color: $fontColorVal;
+    }
+}
+</style>

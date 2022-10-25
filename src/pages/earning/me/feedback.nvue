@@ -1,0 +1,134 @@
+<template>
+    <page-meta
+        background-color="#fbeec4"
+        page-style="color: #1c1c1c"
+        root-font-size="16px"
+    >
+        <navigation-bar front-color="#000000" background-color="#fbeec4" />
+    </page-meta>
+    <view class="app-page">
+        <u-navbar
+            title="任务材料"
+            :autoBack="false"
+            @leftClick="leftClick"
+            fixed
+        />
+        <view :style="{ height: '69px' }"> </view>
+        <!-- 注意，如果需要兼容微信小程序，最好通过setRules方法设置rules规则 -->
+        <view style="padding: 10rpx; height: 600rpx">
+            <u--textarea
+                border="surround"
+                v-model="formData.content"
+                placeholder="请输入内容要反馈的内容"
+                autoHeight
+                count
+            ></u--textarea>
+        </view>
+        <!-- data-footer-fixed -->
+
+        <view
+     
+            @click="clickTake"
+            style="
+                height: 100rpx;
+                width: 750rpx;
+                display: flex;
+                padding:10rpx;
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+            "
+        >
+            <u-button
+                type="primary"
+                text="确定反馈"
+                @click="leftClick"
+            ></u-button>
+        </view>
+    </view>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            fileList1: [],
+
+            formData: {
+                title: '',
+                down_url: '',
+                task_count: 0,
+                task_price: 0, //单位100
+            },
+
+            rules: {
+                title: {
+                    type: 'string',
+                    required: true,
+                    message: '请填写任务标题',
+                    trigger: ['blur', 'change'],
+                },
+            },
+            radio: '',
+            switchVal: false,
+        }
+    },
+    methods: {
+        leftClick() {
+            uni.navigateBack()
+        },
+        uploadFilePromise(url) {
+            return new Promise((resolve, reject) => {
+                let a = uni.uploadFile({
+                    url: 'http://192.168.2.21:7001/upload', // 仅为示例，非真实的接口地址
+                    filePath: url,
+                    name: 'file',
+                    formData: {
+                        user: 'test',
+                    },
+                    success: (res) => {
+                        setTimeout(() => {
+                            resolve(res.data.data)
+                        }, 1000)
+                    },
+                })
+            })
+        },
+        // 新增图片
+        async afterRead(event) {
+            // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+            let lists = [].concat(event.file)
+            let fileListLen = this[`fileList${event.name}`].length
+            lists.map((item) => {
+                this[`fileList${event.name}`].push({
+                    ...item,
+                    status: 'uploading',
+                    message: '上传中',
+                })
+            })
+            for (let i = 0; i < lists.length; i++) {
+                const result = await this.uploadFilePromise(lists[i].url)
+                let item = this[`fileList${event.name}`][fileListLen]
+                this[`fileList${event.name}`].splice(
+                    fileListLen,
+                    1,
+                    Object.assign(item, {
+                        status: 'success',
+                        message: '',
+                        url: result,
+                    })
+                )
+                fileListLen++
+            }
+        },
+        // 删除图片
+        deletePic(event) {
+            this[`fileList${event.name}`].splice(event.index, 1)
+        },
+        sexSelect(e) {
+            this.formData.userInfo.sex = e.name
+            this.$refs.form1.validateField('userInfo.sex')
+        },
+    },
+}
+</script>

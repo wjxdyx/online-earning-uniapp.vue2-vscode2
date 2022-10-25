@@ -1,0 +1,57 @@
+<template>
+    <view
+        style="position: relative"
+        class="c-badge flex flex-center"
+        @click="(e) => $emit('click', e)"
+    >
+        <u-icon :name="IconName" size="30"></u-icon>
+
+        <slot>
+            <text style="font-size: 30rpx">{{ title }}</text>
+        </slot>
+    </view>
+</template>
+
+<script>
+export default {
+    props: {
+        value: {
+            type: Number,
+            default: 0,
+        },
+        showBadge: {
+            type: Boolean,
+            default: true,
+        },
+        IconName: {
+            type: String,
+            default: () => {
+                return 'grid'
+            },
+        },
+        title: {
+            type: String,
+            default: () => {
+                return '进行中'
+            },
+        },
+    },
+    components: {},
+    data() {
+        return {
+            value4: 0,
+        }
+    },
+    onLoad() {},
+    methods: {
+        changeRand(a) {
+            console.log(a)
+        },
+        click(e) {
+            this.$emit('click', e)
+        },
+    },
+}
+</script>
+
+<style lang="scss"></style>

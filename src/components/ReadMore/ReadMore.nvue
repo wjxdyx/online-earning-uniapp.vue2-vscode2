@@ -1,0 +1,44 @@
+<template>
+    <view class="read-more" :class="{ noReadMore: value }">
+        <slot> </slot>
+       
+    </view>
+</template>
+
+<script>
+export default {
+    name: 'ReadMore',
+    props: {
+        value: {
+            type: Boolean,
+            default: false,
+        },
+    },
+    data() {
+        return {
+            showReadMore: false,
+        }
+    },
+    watch: {
+        value: function (newVal) {},
+    },
+    methods: {
+        handleClick() {
+            this.showReadMore = !this.showReadMore
+            this.$emit('input', !value)
+        },
+    },
+}
+</script>
+<style lang="scss">
+.read-more {
+    height: 100rpx;
+    overflow-y: hidden;
+    transition: height 2s;
+}
+.noReadMore {
+    height: initial;
+    overflow-y: initial;
+    
+}
+</style>
